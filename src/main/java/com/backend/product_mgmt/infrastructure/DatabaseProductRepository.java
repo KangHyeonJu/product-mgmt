@@ -1,9 +1,11 @@
 package com.backend.product_mgmt.infrastructure;
 
+import com.backend.product_mgmt.domain.EntityNotFoundException;
 import com.backend.product_mgmt.domain.Product;
 import com.backend.product_mgmt.domain.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -43,10 +45,16 @@ public class DatabaseProductRepository implements ProductRepository {
     public Product findById(Long id){
         SqlParameterSource namedParameter = new MapSqlParameterSource("id", id);
 
-        Product product = namedParameterJdbcTemplate.queryForObject(
+        Product product = null;
+
+        try{
+            product = namedParameterJdbcTemplate.queryForObject(
                 "SELECT id, name, price, amount FROM products WHERE id=:id",
                 namedParameter, new BeanPropertyRowMapper<>(Product.class)
-        );
+            );
+        }catch (EmptyResultDataAccessException exception){
+            throw new EntityNotFoundException("Product를 찾지 못했습니다.");
+        }
 
         return product;
     }

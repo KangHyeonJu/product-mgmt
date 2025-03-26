@@ -18,16 +18,16 @@ public class ProductMgmtApplication {
 		SpringApplication.run(ProductMgmtApplication.class, args);
 	}
 
-	@Bean
-	public ModelMapper modelMapper(){
-		ModelMapper modelMapper = new ModelMapper();
-
-		modelMapper.getConfiguration()
-				.setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
-				.setFieldMatchingEnabled(true);
-
-		return modelMapper;
-	}
+//	@Bean
+//	public ModelMapper modelMapper(){
+//		ModelMapper modelMapper = new ModelMapper();
+//
+//		modelMapper.getConfiguration()
+//				.setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
+//				.setFieldMatchingEnabled(true);
+//
+//		return modelMapper;
+//	}
 
 	@Bean
 	@Profile("prod")
