@@ -3,7 +3,6 @@ package com.backend.product_mgmt.application;
 import com.backend.product_mgmt.domain.Product;
 import com.backend.product_mgmt.domain.ProductRepository;
 import com.backend.product_mgmt.presentation.ProductDto;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
