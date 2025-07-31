@@ -2,7 +2,14 @@ package com.backend.product_mgmt.presentation;
 
 import com.backend.product_mgmt.domain.Product;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
     private Long id;
 
@@ -15,34 +22,7 @@ public class ProductDto {
     @NotNull
     private Integer amount;
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public ProductDto(String name, Integer price, Integer amount) {
-        this.name = name;
-        this.price = price;
-        this.amount = amount;
-    }
-
-    public ProductDto(Long id, String name, Integer price, Integer amount) {
-        this.id = id;
         this.name = name;
         this.price = price;
         this.amount = amount;

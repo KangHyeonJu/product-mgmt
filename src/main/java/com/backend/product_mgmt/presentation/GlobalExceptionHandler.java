@@ -16,6 +16,12 @@ import java.util.logging.ErrorManager;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+//        String errorMessage = e.getLocalizedMessage();
+//        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+//    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<String> handleConstraintViolatedException(ConstraintViolationException ex){
         Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();

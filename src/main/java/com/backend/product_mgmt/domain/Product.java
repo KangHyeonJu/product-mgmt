@@ -3,9 +3,16 @@ package com.backend.product_mgmt.domain;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     private Long id;
 
@@ -19,38 +26,6 @@ public class Product {
     @Max(9_999)
     @Min(0)
     private Integer amount;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
 
     public Boolean sameId(Long id){
         return this.id.equals(id);
@@ -66,16 +41,5 @@ public class Product {
         if(o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(id, product.id);
-    }
-
-    public Product(){
-
-    }
-
-    public Product(Long id, String name, Integer price, Integer amount) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.amount = amount;
     }
 }

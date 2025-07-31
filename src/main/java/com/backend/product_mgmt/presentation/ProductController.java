@@ -3,24 +3,28 @@ package com.backend.product_mgmt.presentation;
 import com.backend.product_mgmt.application.SimpleProductService;
 import com.backend.product_mgmt.domain.Product;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
 
-    private SimpleProductService simpleProductService;
+    private final SimpleProductService simpleProductService;
 
-    @Autowired
-    ProductController(SimpleProductService simpleProductService){
-        this.simpleProductService = simpleProductService;
-    }
+//    @Autowired
+//    ProductController(SimpleProductService simpleProductService){
+//        this.simpleProductService = simpleProductService;
+//    }
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public ProductDto createProduct(@Valid  @RequestBody ProductDto productDto){
-        return simpleProductService.add(productDto);
+            return simpleProductService.add(productDto);
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)

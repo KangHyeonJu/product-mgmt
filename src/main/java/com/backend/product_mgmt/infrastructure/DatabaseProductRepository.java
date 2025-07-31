@@ -3,6 +3,7 @@ package com.backend.product_mgmt.infrastructure;
 import com.backend.product_mgmt.domain.EntityNotFoundException;
 import com.backend.product_mgmt.domain.Product;
 import com.backend.product_mgmt.domain.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,13 +22,9 @@ import java.util.List;
 
 @Repository
 @Profile("prod")
+@RequiredArgsConstructor
 public class DatabaseProductRepository implements ProductRepository {
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    @Autowired
-    public DatabaseProductRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public Product add(Product product){
         KeyHolder keyHolder = new GeneratedKeyHolder();

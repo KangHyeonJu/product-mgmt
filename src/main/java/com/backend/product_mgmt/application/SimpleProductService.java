@@ -3,21 +3,17 @@ package com.backend.product_mgmt.application;
 import com.backend.product_mgmt.domain.Product;
 import com.backend.product_mgmt.domain.ProductRepository;
 import com.backend.product_mgmt.presentation.ProductDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SimpleProductService {
-    private ProductRepository productRepository;
-    private ValidationService validationService;
-
-    @Autowired
-    SimpleProductService(ProductRepository productRepository, ValidationService validationService){
-        this.productRepository = productRepository;
-        this.validationService = validationService;
-    }
+    private final ProductRepository productRepository;
+    private final ValidationService validationService;
 
     public ProductDto add(ProductDto productDto){
         Product product = ProductDto.toEntity(productDto);
