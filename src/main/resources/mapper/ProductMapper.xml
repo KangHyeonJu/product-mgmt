@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- XML 매퍼 파일이 어떤 Mapper 인터페이스(Java)와 연결되는지 지정 -->
+<!-- namespace 값은 해당 인터페이스의 FQCN (full-qualified class name) -->
+<mapper namespace="com.backend.product_mgmt.domain.ProductMapper">
+
+    <!--  useGeneratedKeys: DB에서 자동 생성되는 키를 Java 객체에 자동으로 주입하겠다는 의미 -->
+    <!--  keyProperty: useGeneratedKeys를 사용할 때, 자동 생성된 키 값을 저장할 자바 객체의 필드명  -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO products (name, price, amount)
+        VALUES (#{name}, #{price}, #{amount})
+    </insert>
+
+    <!--  resultType: select 결과를 매핑할 Java 클래스 타입, 쿼리 결과의 각 칼럼이 Java 객체의 필드에 자동으로 매핑됨  -->
+    <!--  mybatis.type-aliases-package에 작성한 경로에 있는 클래스들은 XML에서 resultType="Product"처럼 짧은 이름으로 사용가능-->
+    <select id="findById" resultType="Product">
+        SELECT id, name, price, amount
+        FROM products
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="Product">
+        SELECT id, name, price, amount
+        FROM products
+    </select>
+
+    <select id="findByNameContaining" resultType="Product">
+        SELECT id, name, price, amount
+        FROM products
+        WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+    <update id="update">
+        UPDATE products
+        SET name = #{name},
+            price = #{price},
+            amount = #{amount}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM products
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
